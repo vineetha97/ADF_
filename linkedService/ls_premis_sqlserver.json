@@ -1,0 +1,16 @@
+{
+	"name": "ls_premis_sqlserver",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "SqlServer",
+		"typeProperties": {
+			"connectionString": "integrated security=False;data source=LAPTOP-EOM96AR2;initial catalog=AdventureWorksDW2019;user id=vinsqladmin",
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiI4ZDQ1MDhkZS02MjExLTRmMjQtYTE3NC1lNmFhNDY1NmU2NDYiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+		},
+		"connectVia": {
+			"referenceName": "IRMSSQLSERVER",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}
