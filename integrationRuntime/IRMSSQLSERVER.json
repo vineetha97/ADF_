@@ -1,0 +1,6 @@
+{
+	"name": "IRMSSQLSERVER",
+	"properties": {
+		"type": "SelfHosted"
+	}
+}
