@@ -1,0 +1,35 @@
+trigger:
+- master #change master to something else if master is not your main branch
+pool:
+  vmImage: 'ubuntu-latest'
+steps:
+- task: NodeTool@0
+  inputs:
+    versionSpec: '10.x'
+  displayName: 'Install Node.js'
+ 
+- task: Npm@1
+  inputs:
+    command: 'install'
+    verbose: true
+  displayName: 'Install npm package'
+- task: Npm@1
+  inputs:
+    command: 'custom'
+    customCommand: 'run build validate $(Build.Repository.LocalPath) /subscriptions/953a158a-7768-4a35-9102-bdf7ceeb2348/resourceGroups/resgrp/providers/Microsoft.DataFactory/factories/adf-new-vin '
+  displayName: 'Validate'
+ 
+# Validate and then generate the ARM template into the destination folder. Same as clicking "Publish" from UX
+# The ARM template generated is not published to the ‘Live’ version of the factory. Deployment should be done using a release pipeline.
+- task: Npm@1
+  inputs:
+    command: 'custom'
+    customCommand: 'run build export $(Build.Repository.LocalPath) /subscriptions/<953a158a-7768-4a35-9102-bdf7ceeb2348>/resourceGroups/resgrp/providers/Microsoft.DataFactory/factories/adf-new-vin "ArmTemplate"'
+  displayName: 'Validate and Generate ARM template'
+ 
+# Publish the Artifact to be used as a source for a release pipeline
+- task: PublishPipelineArtifact@1
+  inputs:
+    targetPath: '$(Build.Repository.LocalPath)/ArmTemplate'
+    artifact: 'ArmTemplates'
+    publishLocation: 'pipeline'
